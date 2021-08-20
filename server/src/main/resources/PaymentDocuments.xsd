@@ -59,7 +59,7 @@
                 <xs:element name="amount" type="xs:int" />
                 <xs:element name="sourceAccount" type="tns:account" />
                 <xs:element name="destinationAccount" type="tns:account" />
-            </xs:sequence>
+            </xs:sequence>  
         </xs:complexType>
     </xs:element>
 

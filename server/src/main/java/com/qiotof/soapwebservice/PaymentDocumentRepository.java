@@ -1,5 +1,6 @@
 package com.qiotof.soapwebservice;
 
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.stereotype.Component;

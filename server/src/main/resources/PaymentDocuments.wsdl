@@ -105,7 +105,7 @@
         </xs:schema>
     </wsdl:types>
     <wsdl:message name="getPaymentDocumentByIdRequest">
-        <wsdl:part element="tns:getPaymentDocumentbyIdRequest" name="getPaymentDocumentByIdRequest"></wsdl:part>
+        <wsdl:part element="tns:getPaymentDocumentByIdRequest" name="getPaymentDocumentByIdRequest"></wsdl:part>
     </wsdl:message>
     <wsdl:message name="getPaymentDocumentByIdResponse">
         <wsdl:part element="tns:getPaymentDocumentByIdResponse" name="getPaymentDocumentByIdResponse"></wsdl:part>

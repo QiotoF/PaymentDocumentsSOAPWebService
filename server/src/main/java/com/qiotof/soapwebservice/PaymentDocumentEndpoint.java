@@ -1,6 +1,12 @@
 package com.qiotof.soapwebservice;
 
 import com.qiotof.soapwebservice.PaymentDocumentRepository;
+import io.spring.guides.gs_producing_web_service.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
+import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
+import org.springframework.ws.server.endpoint.annotation.RequestPayload;
+import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
 public class PaymentDocumentEndpoint {
@@ -18,25 +24,36 @@ public class PaymentDocumentEndpoint {
     @ResponsePayload
     public GetPaymentDocumentByIdResponse getPaymentDocument(@RequestPayload GetPaymentDocumentByIdRequest request) {
         GetPaymentDocumentByIdResponse response = new GetPaymentDocumentByIdResponse();
-        response.setPaymentDocument(repository.findPaymentDocumentById(request.getId));
+
+        try {
+            response.setPaymentDocument(repository.findPaymentDocumentById(request.getId()));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return response;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "addPaymentDocumentRequest")
     @ResponsePayload
     public AddPaymentDocumentResponse addPaymentDocument(@RequestPayload AddPaymentDocumentRequest request) {
-        repository.addPaymentDocument(request.purpose, request.amount, request.sourceAccount, request.destinationAccount);
+        AddPaymentDocumentResponse response = new AddPaymentDocumentResponse();
+        repository.addPaymentDocument(request.getPurpose(), request.getAmount(), request.getSourceAccount(), request.getDestinationAccount());
+        return response;
     };
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "deletePaymentDocumentRequest")
     @ResponsePayload
     public DeletePaymentDocumentResponse deletePaymentDocument(@RequestPayload DeletePaymentDocumentRequest request) {
-        repository.deletePaymentDocument(request.id);
+        DeletePaymentDocumentResponse response = new DeletePaymentDocumentResponse();
+        repository.deletePaymentDocument(request.getId());
+        return response;
     };
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllPaymentDocumentsRequest")
     @ResponsePayload
     public GetAllPaymentDocumentsResponse deletePaymentDocument(@RequestPayload GetAllPaymentDocumentsRequest request) {
-        return repository.getAllPaymentDocuments();
+        GetAllPaymentDocumentsResponse response = new GetAllPaymentDocumentsResponse();
+        response.getPaymentDocument().addAll(repository.getAllPaymentDocuments());
+        return response;
     };
 }

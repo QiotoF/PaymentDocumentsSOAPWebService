@@ -19,11 +19,8 @@ public class PaymentDocumentRepository {
         return id;
     }
 
-    public PaymentDocument findPaymentDocumentById(int id) throws Exception {
-        PaymentDocument doc = paymentDocuments.get(id);
-        if (doc == null)
-            throw new Exception("No such element!");
-        return doc;
+    public PaymentDocument findPaymentDocumentById(int id) {
+        return paymentDocuments.get(id);
     }
 
     public PaymentDocument addPaymentDocument(String purpose, int amount, String sourceAccount, String destinationAccount) {
@@ -37,8 +34,8 @@ public class PaymentDocumentRepository {
         return doc;
     }
 
-    public void deletePaymentDocument(int id) {
-        paymentDocuments.remove(id);
+    public PaymentDocument deletePaymentDocument(int id) {
+        return paymentDocuments.remove(id);
     }
 
     public List<PaymentDocument> getAllPaymentDocuments() {

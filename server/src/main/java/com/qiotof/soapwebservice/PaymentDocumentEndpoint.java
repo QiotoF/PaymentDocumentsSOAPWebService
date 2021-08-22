@@ -25,11 +25,8 @@ public class PaymentDocumentEndpoint {
     public GetPaymentDocumentByIdResponse getPaymentDocument(@RequestPayload GetPaymentDocumentByIdRequest request) {
         GetPaymentDocumentByIdResponse response = new GetPaymentDocumentByIdResponse();
 
-        try {
-            response.setPaymentDocument(repository.findPaymentDocumentById(request.getId()));
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        response.setPaymentDocument(repository.findPaymentDocumentById(request.getId()));
+
         return response;
     }
 
@@ -38,16 +35,34 @@ public class PaymentDocumentEndpoint {
     public AddPaymentDocumentResponse addPaymentDocument(@RequestPayload AddPaymentDocumentRequest request) {
         AddPaymentDocumentResponse response = new AddPaymentDocumentResponse();
         repository.addPaymentDocument(request.getPurpose(), request.getAmount(), request.getSourceAccount(), request.getDestinationAccount());
+        ServiceStatus status = new ServiceStatus();
+        status.setStatusCode("SUCCESS");
+        status.setMessage("Item successfully added");
+        response.setServiceStatus(status);
         return response;
-    };
+    }
+
+    ;
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "deletePaymentDocumentRequest")
     @ResponsePayload
     public DeletePaymentDocumentResponse deletePaymentDocument(@RequestPayload DeletePaymentDocumentRequest request) {
         DeletePaymentDocumentResponse response = new DeletePaymentDocumentResponse();
-        repository.deletePaymentDocument(request.getId());
+        PaymentDocument doc = repository.deletePaymentDocument(request.getId());
+        ServiceStatus status = new ServiceStatus();
+
+        if (doc == null) {
+            status.setStatusCode("FAIL");
+            status.setMessage("There is no such id");
+        } else {
+            status.setStatusCode("SUCCESS");
+            status.setMessage("Item successfully deleted");
+        }
+        response.setServiceStatus(status);
         return response;
-    };
+    }
+
+    ;
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllPaymentDocumentsRequest")
     @ResponsePayload
@@ -55,5 +70,7 @@ public class PaymentDocumentEndpoint {
         GetAllPaymentDocumentsResponse response = new GetAllPaymentDocumentsResponse();
         response.getPaymentDocument().addAll(repository.getAllPaymentDocuments());
         return response;
-    };
+    }
+
+    ;
 }

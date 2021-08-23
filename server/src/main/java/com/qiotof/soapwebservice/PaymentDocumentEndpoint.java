@@ -34,7 +34,12 @@ public class PaymentDocumentEndpoint {
     @ResponsePayload
     public AddPaymentDocumentResponse addPaymentDocument(@RequestPayload AddPaymentDocumentRequest request) {
         AddPaymentDocumentResponse response = new AddPaymentDocumentResponse();
-        repository.addPaymentDocument(request.getPurpose(), request.getAmount(), request.getSourceAccount(), request.getDestinationAccount());
+        response.setPaymentDocument(
+                repository.addPaymentDocument(
+                        request.getPurpose(),
+                        request.getAmount(),
+                        request.getSourceAccount(),
+                        request.getDestinationAccount()));
         ServiceStatus status = new ServiceStatus();
         status.setStatusCode("SUCCESS");
         status.setMessage("Item successfully added");

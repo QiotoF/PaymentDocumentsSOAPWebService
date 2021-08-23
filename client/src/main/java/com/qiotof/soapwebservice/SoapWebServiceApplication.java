@@ -7,16 +7,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class SoapwebserviceApplication {
+public class SoapWebServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SoapwebserviceApplication.class, args);
+        SpringApplication.run(SoapWebServiceApplication.class, args);
     }
 
     @Bean
     CommandLineRunner lookup(PaymentDocumentClient client) {
         return args -> {
 
+            System.out.println();
             System.out.println("--- Add PaymentDocument ---");
             String purpose = "For birthday present";
             int amount = 500;

@@ -10,9 +10,9 @@
 		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.qiotof</groupId>
-	<artifactId>soapwebservice</artifactId>
+	<artifactId>soap-web-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>soapwebservice</name>
+	<name>soap-web-service</name>
 	<description>Client side application of PaymentDocumentsSOAPWebService</description>
 	<properties>
 		<java.version>11</java.version>

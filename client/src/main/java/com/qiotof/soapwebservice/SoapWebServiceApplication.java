@@ -1,6 +1,6 @@
 package com.qiotof.soapwebservice;
 
-import com.example.consumingwebservice.wsdl.*;
+import com.qiotof.soapwebservice.wsdl.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

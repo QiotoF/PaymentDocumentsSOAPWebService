@@ -1,6 +1,6 @@
 package com.qiotof.soapwebservice;
 
-import com.example.consumingwebservice.wsdl.*;
+import com.qiotof.soapwebservice.wsdl.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
